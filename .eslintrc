@@ -1,0 +1,11 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+      ],
+    "parser": "babel-eslint",
+    "rules": {
+        "react/prop-types": 0,
+        "no-unused-vars": [2, { "argsIgnorePattern": "^_" }]
+    }
+}

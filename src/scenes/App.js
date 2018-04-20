@@ -1,37 +1,50 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navigation from "./Navigation";
-import LandingPage from "./Landing";
-import SignUpPage from "./SignUp";
-import SignInPage from "./SignIn";
-import PasswordResetPage from "./PasswordReset";
-import HomePage from "./Home";
-import AccountPage from "./Account";
+import LandingPage from "./Landing/Landing";
+import SignUpPage from "./Account/scenes/SignUp";
+import SignInPage from "./Account/scenes/SignIn";
+import PasswordResetPage from "./Account/scenes/PasswordReset";
+import HomePage from "./Home/Home";
+import Game from "./Game/Game";
+import AccountPage from "./Account/scenes/Account";
 import * as routes from "../constants/routes";
-import { firebase } from "../firebase";
+import { firebase } from "../services/firebase";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authUser: null
+      authUser: null,
+      shouldShowNav: true
     };
   }
 
   componentDidMount() {
-    firebase.auth.onAuthStateChanged(authUser => {
+    firebase.auth.onAuthStateChanged((authUser, _error) => {
       authUser
         ? this.setState(() => ({ authUser }))
         : this.setState(() => ({ authUser: null }));
     });
   }
 
+  gameStart = () => {
+    this.setState(() => ({ shouldShowNav: false }))
+  }
+
   render() {
     return (
       <Router>
         <div>
-          <Navigation authUser={this.state.authUser} />
-          <hr />
+          {
+            this.state.shouldShowNav &&
+              <div>
+                <Navigation
+                  authUser={this.state.authUser}
+                  gameStartCallback={this.gameStart} />
+                <hr />
+              </div>
+          }
 
           <Route
             exact
@@ -46,6 +59,7 @@ class App extends Component {
             component={() => <PasswordResetPage />}
           />
           <Route exact path={routes.HOME} component={() => <HomePage />} />
+          <Route exact path={routes.GAME} component={() => <Game />} />
           <Route
             exact
             path={routes.ACCOUNT}
