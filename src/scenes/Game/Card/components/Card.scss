@@ -1,9 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Merienda');
+
 .card {
+    float: left;
+    text-align: center;
+    background-color:lightgray;
+    font-family: 'Merienda', cursive;
     width: 120px;
     height: 150px;
     border: 2px solid black;
     border-radius: 10px;
-    float: left;
-    text-align: center;
-    background-color:lightgray;
+
+    &__name {
+        font-weight: bold;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 12px;
+    }
+
+    &__clock {
+        position: absolute;
+        background-image: url('../images/clock.png');
+        width: 28px;
+        height: 27px;
+        padding-top: 1px;
+        margin-top: -2px;
+        margin-left: 2px;
+    }
+
+    &__img {
+        object-fit: cover;
+        width: 100px;
+        height: 95px;
+    }
+
+    &__stats {
+        margin: 0 5px;
+    }
+
+    &__power {
+        float: left;
+        background-image: url('../images/sword.png');
+        position: relative;
+        line-height: 24px;
+        width: 28px;
+        height: 28px;
+        &--long {
+            font-size: 12px;
+        }
+    }
+
+    &__hp {
+        float: right;
+        background-image: url('../images/heart.png');
+        width: 28px;
+        height: 26px;
+        padding-top: 2px;
+    }
 }
