@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Navigation from "./Navigation";
+import { Router, Route } from "react-router-dom";
 import LandingPage from "./Landing/Landing";
 import SignUpPage from "./Account/scenes/SignUp";
 import SignInPage from "./Account/scenes/SignIn";
@@ -10,13 +9,17 @@ import Game from "./Game/Game";
 import AccountPage from "./Account/scenes/Account";
 import * as routes from "../constants/routes";
 import { firebase } from "../services/firebase";
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import NavBar from "./NavBar/NavBar";
+import history from "./history.js";
 
 class App extends Component {
+  theme = createMuiTheme();
+
   constructor(props) {
     super(props);
     this.state = {
       authUser: null,
-      shouldShowNav: true
     };
   }
 
@@ -28,44 +31,34 @@ class App extends Component {
     });
   }
 
-  gameStart = () => {
-    this.setState(() => ({ shouldShowNav: false }))
-  }
-
   render() {
     return (
-      <Router>
-        <div>
-          {
-            this.state.shouldShowNav &&
-              <div>
-                <Navigation
-                  authUser={this.state.authUser}
-                  gameStartCallback={this.gameStart} />
-                <hr />
-              </div>
-          }
+      <Router history={history}>
+        <MuiThemeProvider theme={this.theme}>
+          <div>
+            <NavBar authUser={this.state.authUser} history={history} />
 
-          <Route
-            exact
-            path={routes.LANDING}
-            component={() => <LandingPage />}
-          />
-          <Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
-          <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
-          <Route
-            exact
-            path={routes.PASSWORD_RESET}
-            component={() => <PasswordResetPage />}
-          />
-          <Route exact path={routes.HOME} component={() => <HomePage />} />
-          <Route exact path={routes.GAME} component={() => <Game />} />
-          <Route
-            exact
-            path={routes.ACCOUNT}
-            component={() => <AccountPage />}
-          />
-        </div>
+            <Route
+              exact
+              path={routes.LANDING}
+              component={() => <LandingPage />}
+            />
+            <Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
+            <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+            <Route
+              exact
+              path={routes.PASSWORD_RESET}
+              component={() => <PasswordResetPage />}
+            />
+            <Route exact path={routes.HOME} component={() => <HomePage />} />
+            <Route exact path={routes.GAME} component={() => <Game />} />
+            <Route
+              exact
+              path={routes.ACCOUNT}
+              component={() => <AccountPage />}
+            />
+          </div>
+        </MuiThemeProvider>
       </Router>
     );
   }
