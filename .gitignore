@@ -1,6 +1,9 @@
 # compiled sass
 *.css
 
+# config files
+*.config.*
+
 # dependencies
 /node_modules
 
