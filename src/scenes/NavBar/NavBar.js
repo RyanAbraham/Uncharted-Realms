@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router';
-import { AppBar, IconButton, Toolbar, MenuItem, Button } from "material-ui";
-import MenuIcon from '@material-ui/icons/Menu';
-import { Typography } from "material-ui";
-import { Menu } from "material-ui";
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import { Redirect } from "react-router";
+import { AppBar, IconButton, Toolbar, MenuItem, Button, Menu, Typography } from "material-ui";
+import MenuIcon from "@material-ui/icons/Menu";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import * as routes from "../../constants/routes";
 import { auth } from "../../services/firebase";
 import "./NavBar.css";
@@ -57,12 +55,12 @@ class NavBar extends Component {
             id="ur-menu"
             anchorEl={anchorMenuEl}
             anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             open={menuOpen}
             onClose={this.handleClose}
@@ -74,38 +72,38 @@ class NavBar extends Component {
           </Typography>
           <div>
             {this.props.authUser
-            ? (
-              <div>
-                <IconButton
-                  aria-owns={profileOpen ? 'menu-appbar' : null}
-                  aria-haspopup="true"
-                  onClick={this.handleProfileMenuClick}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="ur-account-menu"
-                  anchorEl={anchorProfileEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={profileOpen}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem onClick={() => this.handleRedirect(routes.ACCOUNT)}>Profile</MenuItem>
-                  <MenuItem onClick={auth.doSignOut}>Logout</MenuItem>
-                </Menu>
-              </div>
-            )
-            : (
-              <Button onClick={() => this.handleRedirect(routes.SIGN_IN)} color="inherit">Login</Button>
-            )}
+              ? (
+                <div>
+                  <IconButton
+                    aria-owns={profileOpen ? "menu-appbar" : null}
+                    aria-haspopup="true"
+                    onClick={this.handleProfileMenuClick}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                  <Menu
+                    id="ur-account-menu"
+                    anchorEl={anchorProfileEl}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={profileOpen}
+                    onClose={this.handleClose}
+                  >
+                    <MenuItem onClick={() => this.handleRedirect(routes.ACCOUNT)}>Profile</MenuItem>
+                    <MenuItem onClick={auth.doSignOut}>Logout</MenuItem>
+                  </Menu>
+                </div>
+              )
+              : (
+                <Button onClick={() => this.handleRedirect(routes.ENTRY)} color="inherit">Login</Button>
+              )}
           </div>
         </Toolbar>
       </AppBar>

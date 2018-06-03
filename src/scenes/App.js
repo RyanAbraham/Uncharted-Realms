@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { Router, Route } from "react-router-dom";
 import LandingPage from "./Landing/Landing";
-import SignUpPage from "./Account/scenes/SignUp";
-import SignInPage from "./Account/scenes/SignIn";
+import EntryPage from "./Entry/scenes/Entry";
 import PasswordResetPage from "./Account/scenes/PasswordReset";
 import HomePage from "./Home/Home";
 import Game from "./Game/Game";
 import AccountPage from "./Account/scenes/Account";
 import * as routes from "../constants/routes";
 import { firebase } from "../services/firebase";
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
 import NavBar from "./NavBar/NavBar";
 import history from "./history.js";
 
@@ -43,8 +42,7 @@ class App extends Component {
               path={routes.LANDING}
               component={() => <LandingPage />}
             />
-            <Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
-            <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+            <Route exact path={routes.ENTRY} component={() => <EntryPage />} />
             <Route
               exact
               path={routes.PASSWORD_RESET}
