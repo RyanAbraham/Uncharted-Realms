@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { auth } from "../../../services/firebase";
 import * as routes from "../../../constants/routes";
 import { TextField, InputAdornment, Button, IconButton } from "material-ui";
@@ -113,5 +114,9 @@ class SignUpPage extends Component {
     );
   }
 }
+
+SignUpPage.propTypes = {
+  history: PropTypes.object.isRequired,
+};
 
 export default SignUpPage;
