@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import SignInPage from "../components/SignInPage.js";
+import SignInPage from "./SignInPage.js";
+import SignUpPage from "./SignUpPage.js";
 import { withRouter } from "react-router-dom";
 import { AppBar, Tabs, Tab, Typography, Paper } from "material-ui";
 import "./Entry.css";
@@ -45,8 +46,11 @@ class EntryForm extends Component {
         <div className="ur-entry__container">
           <Paper>
             <TabContainer>
-              {pageType === PageTypes.SIGNIN && <SignInPage />}
-              {pageType === PageTypes.SIGNUP && <TabContainer>Registration Page Placeholder</TabContainer>}
+              {
+                pageType === PageTypes.SIGNIN
+                  ? <SignInPage history={this.props.history} />
+                  : <SignUpPage history={this.props.history} />
+              }
             </TabContainer>
           </Paper>
         </div>

@@ -1,20 +1,16 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 import { auth } from "../../../services/firebase";
 import * as routes from "../../../constants/routes";
-
-const SignUpPage = ({ history }) => (
-  <div>
-    <h1>Sign Up Page</h1>
-    <SignUpForm history={history} />
-  </div>
-);
+import { TextField, InputAdornment, Button, IconButton } from "material-ui";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 const INITIAL_STATE = {
   username: "",
   email: "",
   password: "",
   confirmPassword: "",
+  showPassword: false,
   error: undefined
 };
 
@@ -22,7 +18,7 @@ const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value
 });
 
-class SignUpForm extends Component {
+class SignUpPage extends Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
@@ -30,7 +26,6 @@ class SignUpForm extends Component {
 
   onSubmit = event => {
     const { email, password } = this.state;
-
     const { history } = this.props;
 
     auth
@@ -46,58 +41,77 @@ class SignUpForm extends Component {
     event.preventDefault();
   };
 
+  handleClickShowPassword = () => {
+    this.setState({ showPassword: !this.state.showPassword });
+  };
+
+  handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+
+  fieldStyles = {
+    "width": "100%",
+    "marginBottom": "24px",
+  };
+
   render() {
     const { username, email, password, confirmPassword, error } = this.state;
 
-    const isInvalid =
-      password !== confirmPassword ||
-      password === "" ||
-      email === "" ||
-      username === "";
-
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <form className="signin-form" onSubmit={this.onSubmit}>
+        <TextField
+          label="Username"
           value={username}
           onChange={event =>
             this.setState(byPropKey("username", event.target.value))
           }
-          type="text"
-          placeholder="Username"
+          style={this.fieldStyles}
         />
-        <input
+        <TextField
+          label="Email"
           value={email}
           onChange={event =>
             this.setState(byPropKey("email", event.target.value))
           }
-          type="text"
-          placeholder="Email Address"
+          style={this.fieldStyles}
         />
-        <input
+        <TextField
+          label="Password"
           value={password}
           onChange={event =>
             this.setState(byPropKey("password", event.target.value))
           }
-          type="password"
-          placeholder="Password"
+          type={this.state.showPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment:
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="Toggle password visibility"
+                  onClick={this.handleClickShowPassword}
+                  onMouseDown={this.handleMouseDownPassword}
+                >
+                  {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+          }}
+          style={this.fieldStyles}
         />
-        <input
+        <TextField
+          label="Confirm Password"
+          type={this.state.showPassword ? "text" : "password"}
           value={confirmPassword}
           onChange={event =>
             this.setState(byPropKey("confirmPassword", event.target.value))
           }
-          type="password"
-          placeholder="Confirm Password"
+          style={this.fieldStyles}
         />
-        <button type="submit" disabled={isInvalid}>
-          Sign Up
-        </button>
+        <Button variant="raised" onClick={this.onSubmit}>
+          Submit
+        </Button>
         {error && <p>{error.message}</p>}
       </form>
     );
   }
 }
 
-export default withRouter(SignUpPage);
-
-export { SignUpForm };
+export default SignUpPage;
