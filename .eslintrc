@@ -2,10 +2,23 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
-      ],
+    ],
     "parser": "babel-eslint",
     "rules": {
+        "no-unused-vars": [
+            2,
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
         "react/prop-types": 0,
-        "no-unused-vars": [2, { "argsIgnorePattern": "^_" }]
+        "quotes": [
+            2,
+            "double"
+        ]
     }
 }

@@ -35,7 +35,7 @@ class SignUpForm extends Component {
 
     auth
       .doCreateUserWithEmailAndPassword(email, password)
-      .then(authUser => {
+      .then(_authUser => {
         this.setState(() => ({ ...INITIAL_STATE }));
         history.push(routes.HOME);
       })
@@ -100,7 +100,7 @@ class SignUpForm extends Component {
 
 const SignUpLink = () => (
   <p>
-    Don't have an account? <Link to={routes.SIGN_UP}>Sign Up</Link>
+    Don&apos;t have an account? <Link to={routes.SIGN_UP}>Sign Up</Link>
   </p>
 );
 
