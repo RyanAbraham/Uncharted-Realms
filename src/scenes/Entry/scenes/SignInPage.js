@@ -57,7 +57,7 @@ class SignInPage extends Component {
     const { email, password, error } = this.state;
 
     return (
-      <form className="signin-form" onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit}>
         <TextField
           label="Email"
           value={email}

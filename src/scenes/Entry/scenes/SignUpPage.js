@@ -7,7 +7,6 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 const INITIAL_STATE = {
-  username: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -26,18 +25,22 @@ class SignUpPage extends Component {
   }
 
   onSubmit = event => {
-    const { email, password } = this.state;
+    const { email, password, confirmPassword } = this.state;
     const { history } = this.props;
 
-    auth
-      .doCreateUserWithEmailAndPassword(email, password)
-      .then(_authUser => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-        history.push(routes.HOME);
-      })
-      .catch(error => {
-        this.setState(byPropKey("error", error));
-      });
+    if (password !== confirmPassword) {
+      this.setState(byPropKey("error", { "message": "Passwords do not match" }));
+    } else {
+      auth
+        .doCreateUserWithEmailAndPassword(email, password)
+        .then(_authUser => {
+          this.setState(() => ({ ...INITIAL_STATE }));
+          history.push(routes.HOME);
+        })
+        .catch(error => {
+          this.setState(byPropKey("error", error));
+        });
+    }
 
     event.preventDefault();
   };
@@ -56,18 +59,10 @@ class SignUpPage extends Component {
   };
 
   render() {
-    const { username, email, password, confirmPassword, error } = this.state;
+    const { email, password, confirmPassword, error } = this.state;
 
     return (
-      <form className="signin-form" onSubmit={this.onSubmit}>
-        <TextField
-          label="Username"
-          value={username}
-          onChange={event =>
-            this.setState(byPropKey("username", event.target.value))
-          }
-          style={this.fieldStyles}
-        />
+      <form onSubmit={this.onSubmit}>
         <TextField
           label="Email"
           value={email}

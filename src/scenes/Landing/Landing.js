@@ -1,8 +1,11 @@
 import React from "react";
+import { Typography } from "material-ui";
 
 const LandingPage = () => (
   <div>
-    <h1>Landing Page</h1>
+    <Typography>
+      Welcome to Uncharted Realms!
+    </Typography>
   </div>
 );
 

@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router";
+import PropTypes from "prop-types";
+import { Redirect, withRouter } from "react-router";
 import { AppBar, IconButton, Toolbar, MenuItem, Button, Menu, Typography } from "material-ui";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import * as routes from "../../constants/routes";
 import { auth } from "../../services/firebase";
-import "./NavBar.css";
+
+const toolbarStyles = {
+  "justifyContent": "space-between",
+};
 
 class NavBar extends Component {
   state = {
@@ -40,9 +44,13 @@ class NavBar extends Component {
       return <Redirect push to={`/${this.state.redirect}`} />;
     }
 
+    if (this.props.location.pathname === routes.LANDING) {
+      return null;
+    }
+
     return (
       <AppBar position="static">
-        <Toolbar className="ur-navbar">
+        <Toolbar style={toolbarStyles}>
           <IconButton
             className="ur-navbar__menu-button"
             color="inherit"
@@ -111,4 +119,10 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+NavBar.propTypes = {
+  // These props are provided by wrapping the class with 'withRouter'
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+};
+
+export default withRouter(NavBar);
