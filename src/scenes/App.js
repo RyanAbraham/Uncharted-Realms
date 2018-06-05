@@ -9,11 +9,18 @@ import AccountPage from "./Account/scenes/Account";
 import * as routes from "../constants/routes";
 import { firebase } from "../services/firebase";
 import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
+import blue from "material-ui/colors/blue";
+import indigo from "material-ui/colors/indigo";
 import NavBar from "./NavBar/NavBar";
 import history from "./history.js";
 
 class App extends Component {
-  theme = createMuiTheme();
+  theme = createMuiTheme({
+    palette: {
+      primary: blue,
+      secondary: indigo,
+    }
+  });
 
   constructor(props) {
     super(props);

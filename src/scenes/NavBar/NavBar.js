@@ -52,7 +52,6 @@ class NavBar extends Component {
       <AppBar position="static">
         <Toolbar style={toolbarStyles}>
           <IconButton
-            className="ur-navbar__menu-button"
             color="inherit"
             aria-label="Menu"
             onClick={this.handleMenuClick}
@@ -75,7 +74,7 @@ class NavBar extends Component {
           >
             <MenuItem onClick={() => this.handleRedirect(routes.GAME)}>Game</MenuItem>
           </Menu>
-          <Typography variant="title" color="inherit" className="ur-navbar__title">
+          <Typography variant="title" color="inherit">
             Uncharted Realms
           </Typography>
           <div>
