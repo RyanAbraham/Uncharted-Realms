@@ -36,11 +36,12 @@ class App extends Component {
   }
 
   render() {
+    const { authUser } = this.state;
     return (
       <Router history={history}>
         <MuiThemeProvider theme={this.theme}>
           <div>
-            <NavBar authUser={this.state.authUser} history={history} />
+            <NavBar authUser={authUser} history={history} />
 
             <Route
               exact
@@ -58,7 +59,7 @@ class App extends Component {
             <Route
               exact
               path={routes.ACCOUNT}
-              component={() => <AccountPage />}
+              component={() => <AccountPage authUser={authUser} />}
             />
           </div>
         </MuiThemeProvider>
