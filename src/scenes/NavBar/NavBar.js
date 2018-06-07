@@ -44,44 +44,51 @@ class NavBar extends Component {
 
   render() {
     const { anchorMenuEl, anchorProfileEl } = this.state;
+    const { location, authUser } = this.props;
     const menuOpen = Boolean(anchorMenuEl);
     const profileOpen = Boolean(anchorProfileEl);
 
-    if (this.props.location.pathname === routes.LANDING) {
+    if (location.pathname === routes.LANDING) {
       return null;
     }
 
     return (
       <AppBar position="static">
         <Toolbar style={toolbarStyles}>
-          <IconButton
-            color="inherit"
-            aria-label="Menu"
-            onClick={this.handleMenuClick}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            id="ur-menu"
-            anchorEl={anchorMenuEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={menuOpen}
-            onClose={this.handleClose}
-          >
-            <MenuItem onClick={() => this.handleRedirect(routes.GAME)}>Game</MenuItem>
-          </Menu>
+          <div>
+            {authUser &&
+              <div>
+                <IconButton
+                  color="inherit"
+                  aria-label="Menu"
+                  onClick={this.handleMenuClick}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="ur-menu"
+                  anchorEl={anchorMenuEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={menuOpen}
+                  onClose={this.handleClose}
+                >
+                  <MenuItem onClick={() => this.handleRedirect(routes.GAME)}>Game</MenuItem>
+                </Menu>
+              </div>
+            }
+          </div>
           <Typography variant="title" color="inherit">
             Uncharted Realms
           </Typography>
           <div>
-            {this.props.authUser
+            {authUser
               ? (
                 <div>
                   <IconButton

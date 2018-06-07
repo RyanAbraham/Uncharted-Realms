@@ -41,7 +41,7 @@ class App extends Component {
       <Router history={history}>
         <MuiThemeProvider theme={this.theme}>
           <div>
-            <NavBar authUser={authUser} history={history} />
+            <NavBar authUser={authUser} />
 
             <Route
               exact
