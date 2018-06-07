@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Router, Route } from "react-router-dom";
-import LandingPage from "./Landing/Landing";
+import LandingPage from "./Landing/scenes/Landing";
 import EntryPage from "./Entry/scenes/Entry";
 import PasswordResetPage from "./Account/scenes/PasswordReset";
 import HomePage from "./Home/Home";

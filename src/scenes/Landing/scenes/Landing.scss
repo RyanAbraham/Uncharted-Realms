@@ -1,4 +1,4 @@
-@import "../../constants/variables.scss";
+@import "../../../constants/variables.scss";
 
 .ur-landing-splash {
   &__material-container {
@@ -42,3 +42,18 @@
   }
 
 };
+
+.ur-landing-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 20px;
+  @include media-query(phone) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ur-info-card {
+    margin: 10px;
+  }
+}

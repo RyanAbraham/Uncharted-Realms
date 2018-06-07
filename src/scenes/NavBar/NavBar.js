@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Redirect, withRouter } from "react-router";
+import { withRouter } from "react-router";
 import { AppBar, IconButton, Toolbar, MenuItem, Button, Menu, Typography } from "material-ui";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -39,10 +39,6 @@ class NavBar extends Component {
     const { anchorMenuEl, anchorProfileEl } = this.state;
     const menuOpen = Boolean(anchorMenuEl);
     const profileOpen = Boolean(anchorProfileEl);
-
-    if (this.state.redirect) {
-      return <Redirect push to={`/${this.state.redirect}`} />;
-    }
 
     if (this.props.location.pathname === routes.LANDING) {
       return null;
