@@ -4,7 +4,7 @@ import LandingPage from "./Landing/scenes/Landing";
 import EntryPage from "./Entry/scenes/Entry";
 import PasswordResetPage from "./Account/scenes/PasswordReset";
 import HomePage from "./Home/Home";
-import Game from "./Game/Game";
+import Game from "./Game/scenes/Game";
 import AccountPage from "./Account/scenes/Account";
 import * as routes from "../constants/routes";
 import { firebase } from "../services/firebase";

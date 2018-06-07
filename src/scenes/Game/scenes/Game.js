@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { LinearProgress } from "material-ui";
 import request from "request";
-import Card from "./Card/components/Card";
+import Hand from "../components/Hand/Hand";
 import "./Game.css";
 
 const INITIAL_STATE = {
@@ -18,17 +18,16 @@ class Game extends Component {
     request("http://localhost:5000/cards/generate/5", (err, res, body) => {
       if (!err) {
         this.setState({
-          cards: JSON.parse(body).cards.map(card => {
-            return {
-              "id": card.id,
-              "name": card.name,
-              "pow": card.pow,
-              "hp": card.hp,
-              "clk": card.clk,
-              "eff": card.eff,
-              "img": card.img,
-            };
-          }),
+          cards: JSON.parse(body).cards.map(card => ({
+            "id": card.id,
+            "name": card.name,
+            "pow": card.pow,
+            "hp": card.hp,
+            "clk": card.clk,
+            "eff": card.eff,
+            "img": card.img,
+          })
+          ),
           loading: false,
         });
       }
@@ -41,13 +40,7 @@ class Game extends Component {
       <div>
         {loading && (<LinearProgress />)}
         <div className="ur-game">
-          {
-            cards.map(card =>
-              (
-                <Card cardDetails={card} key={card.id} />
-              )
-            )
-          }
+          <Hand cards={cards} />
         </div>
       </div>
     );
