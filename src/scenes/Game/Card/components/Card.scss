@@ -47,15 +47,19 @@
         width: 28px;
         height: 28px;
         &--long {
-            font-size: 12px;
+            font-size: 11px;
         }
     }
 
     &__hp {
         float: right;
         background-image: url('../images/heart.png');
+        padding-top: 2px;
         width: 28px;
         height: 26px;
-        padding-top: 2px;
+        &--long {
+            font-size: 14px;
+            line-height: 24px;
+        }
     }
 }

@@ -4,19 +4,8 @@ import request from "request";
 import Card from "./Card/components/Card";
 import "./Game.css";
 
-// TODO: Split into container and presentational component
-// https://medium.com/@learnreact/container-components-c0e67432e005
-
 const INITIAL_STATE = {
-  cards: [{
-    "id": 412,
-    "name": "Test Man",
-    "pow": "3",
-    "hp": "2",
-    "clk": "3",
-    "eff": "Ward",
-    "img": "https://i.stack.imgur.com/XPmqF.jpg?s=128&g=1",
-  }],
+  cards: [],
   loading: true,
 };
 
