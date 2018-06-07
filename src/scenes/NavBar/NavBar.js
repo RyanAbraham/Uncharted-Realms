@@ -35,6 +35,13 @@ class NavBar extends Component {
     this.handleClose();
   }
 
+  handleSignout = () => {
+    const { history } = this.props;
+    auth
+      .doSignOut()
+      .then(history.push(routes.LANDING));
+  }
+
   render() {
     const { anchorMenuEl, anchorProfileEl } = this.state;
     const menuOpen = Boolean(anchorMenuEl);
@@ -100,7 +107,7 @@ class NavBar extends Component {
                     onClose={this.handleClose}
                   >
                     <MenuItem onClick={() => this.handleRedirect(routes.ACCOUNT)}>Profile</MenuItem>
-                    <MenuItem onClick={auth.doSignOut}>Logout</MenuItem>
+                    <MenuItem onClick={this.handleSignout}>Logout</MenuItem>
                   </Menu>
                 </div>
               )
