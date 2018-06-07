@@ -1,6 +1,5 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-// TODO: Use process.env to allow deployment from Heroku
 import { devConfig, prodConfig } from "./firebase.config";
 
 // Use production config only if production mode is enabled

@@ -1,21 +1,44 @@
 @import "../../constants/variables.scss";
 
-.ur-landing {
-  &__splash-material {
+.ur-landing-splash {
+  &__material-container {
     width: 100%;
-    height: 70vh;
+    height: 60vh;
+    @include media-query(phone-tablet) {
+      height: 95vh;
+    }
   }
 
-  &__splash {
+  &__content {
+    margin: 0 15px;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  &__container {
     background: linear-gradient(to bottom right, $primary-color-light, $primary-color);
     color: white !important;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     height: 100%;
   }
 
   &__title {
-    font-size: 2em !important;
+    font-size: 2.25em !important;
+    margin-bottom: 30px !important;
   }
+
+  &__subtitle {
+    margin-bottom: 40px !important;
+  }
+
+  &__login-button {
+    width: 40%;
+    margin: 0 auto !important;
+  }
+
 };

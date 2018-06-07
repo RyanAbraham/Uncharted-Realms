@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   password: "",
   confirmPassword: "",
   showPassword: false,
+  showConfirmPassword: false,
   error: undefined
 };
 
@@ -47,6 +48,10 @@ class SignUpPage extends Component {
 
   handleClickShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword });
+  };
+
+  handleClickShowConfirmPassword = () => {
+    this.setState({ showConfirmPassword: !this.state.showConfirmPassword });
   };
 
   handleMouseDownPassword = event => {
@@ -94,11 +99,23 @@ class SignUpPage extends Component {
         />
         <TextField
           label="Confirm Password"
-          type={this.state.showPassword ? "text" : "password"}
+          type={this.state.showConfirmPassword ? "text" : "password"}
           value={confirmPassword}
           onChange={event =>
             this.setState(byPropKey("confirmPassword", event.target.value))
           }
+          InputProps={{
+            endAdornment:
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="Toggle password visibility"
+                  onClick={this.handleClickShowConfirmPassword}
+                  onMouseDown={this.handleMouseDownPassword}
+                >
+                  {this.state.showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+          }}
           style={this.fieldStyles}
         />
         <Button variant="raised" onClick={this.onSubmit}>

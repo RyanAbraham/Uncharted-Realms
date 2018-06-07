@@ -1,5 +1,9 @@
-// TODO: Responsive for mobile
+@import "../../../constants/variables.scss";
+
 .ur-entry {
   margin: 5% 25%;
   background: white;
+  @include media-query(phone-tablet) {
+    margin: 5%;
+  }
 }

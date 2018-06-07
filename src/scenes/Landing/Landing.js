@@ -4,17 +4,20 @@ import "./Landing.css";
 
 const LandingPage = () => (
   <div className="ur-landing">
-    <Paper className="ur-landing__splash-material" color="inheret">
-      <div className="ur-landing__splash">
-        <div className="ur-landing__splash-content">
-          <Typography variant="title" color="inherit" className="ur-landing__title">
-            Welcome to Uncharted Realms!
+    <Paper className="ur-landing-splash__material-container" color="inheret">
+      <div className="ur-landing-splash__container">
+        <div className="ur-landing-splash__content">
+          <Typography variant="title" color="inherit" className="ur-landing-splash__title">
+            Uncharted Realms
           </Typography>
-          <Button href="/entry" color="inherit">Login</Button>
+          <Typography variant="title" color="inherit" className="ur-landing-splash__subtitle">
+            A card game about adventure, discovery, and new experiences
+          </Typography>
+          <Button href="/entry" variant="raised" className="ur-landing-splash__login-button">Login</Button>
         </div>
       </div>
     </Paper>
-    <div className="ur-landing__body">
+    <div className="ur-landing-body">
       Body text
     </div>
   </div>
