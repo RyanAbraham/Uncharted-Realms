@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import SignInPage from "./SignInPage.js";
 import SignUpPage from "./SignUpPage.js";
 import { withRouter } from "react-router-dom";
 import { AppBar, Tabs, Tab, Typography, Paper } from "material-ui";
 import "./Entry.css";
+import { HOME as HOME_ROUTE } from "../../../constants/routes.js";
 
 const PageTypes = Object.freeze({
   SIGNIN: "signin",
@@ -34,6 +36,10 @@ class EntryForm extends Component {
 
   render() {
     const { pageType } = this.state;
+    const { authUser, history } = this.props;
+    if (authUser) {
+      history.push(HOME_ROUTE);
+    }
 
     return (
       <div className="ur-entry">
@@ -58,5 +64,11 @@ class EntryForm extends Component {
     );
   }
 }
+
+EntryForm.propTypes = {
+  authUser: PropTypes.object,
+  // Provided by wrapping the class with 'withRouter'
+  history: PropTypes.object.isRequired,
+};
 
 export default withRouter(EntryForm);

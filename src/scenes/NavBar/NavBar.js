@@ -129,6 +129,7 @@ class NavBar extends Component {
 }
 
 NavBar.propTypes = {
+  authUser: PropTypes.object,
   // These props are provided by wrapping the class with 'withRouter'
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,

@@ -48,7 +48,7 @@ class App extends Component {
               path={routes.LANDING}
               component={() => <LandingPage />}
             />
-            <Route exact path={routes.ENTRY} component={() => <EntryPage />} />
+            <Route exact path={routes.ENTRY} component={() => <EntryPage authUser={authUser} />} />
             <Route
               exact
               path={routes.PASSWORD_RESET}
