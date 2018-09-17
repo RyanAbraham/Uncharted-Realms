@@ -1,0 +1,14 @@
+{
+    "tasks": [
+        {
+            "label": "Start Client",
+            "type": "npm",
+            "script": "start",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
