@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 import { LinearProgress } from "material-ui";
 import rq from "request-promise";
-import Hand from "../components/Hand/Hand";
+import CardList from "../components/CardList/CardList";
 import "./Game.css";
 
 const NUM_PLAYERS = 2;
+const GAME_STATES = Object.freeze({
+  "EMPTY": 0,
+  "LOADING": 1,
+  "TURN_IN_PROGRESS": 2,
+});
 
 const INITIAL_STATE = {
   decks: [],
   hands: [],
+  fields: [],
   turn: 0,
   isLoading: true,
+  gameState: GAME_STATES.LOADING,
 };
 
 class Game extends Component {
@@ -22,8 +29,20 @@ class Game extends Component {
     this.startGame();
   }
 
+  componentDidUpdate() {
+    const { gameState } = this.state;
+    if (gameState === GAME_STATES.EMPTY) {
+      console.log("STARTING TURN");
+      this.setState({
+        gameState: GAME_STATES.TURN_IN_PROGRESS,
+      }, () => {
+        setTimeout(this.doTurn.bind(this), 2000);
+      });
+    }
+  }
+
   render() {
-    const { isLoading, hands } = this.state;
+    const { isLoading, hands, fields } = this.state;
     return (
       <div>
         {
@@ -33,7 +52,8 @@ class Game extends Component {
               {
                 hands.map((hand, idx) => (
                   <div className="hand" key={idx}>
-                    <Hand cards={hand} />
+                    <CardList cards={hand} /> 
+                    <CardList cards={fields} /> 
                   </div>
                 ))
               }
@@ -44,15 +64,41 @@ class Game extends Component {
     );
   }
 
+  doTurn() {
+    let { hands, decks, fields, turn } = this.state;
+    const currentPlayer = turn % NUM_PLAYERS;
+    hands[currentPlayer] = hands[currentPlayer].map(card => {
+      return {
+        ...card,
+        clk: card.clk - 1,
+      };
+    });
+
+    // Draw a card
+    // TODO: Abstract this to its own function
+    hands[currentPlayer].push(decks[currentPlayer].pop());
+
+    this.setState({
+      hands,
+      fields,
+      turn: turn + 1,
+      gameState: GAME_STATES.EMPTY,
+    });
+  }
+
+
   startGame() {
-    let { decks, hands } = this.state;
+    let decks = [];
+    let hands = [];
+    const fields= [];
     for (let i=0; i<NUM_PLAYERS; i++) {
       decks[i] = [];
       hands[i] = [];
+      fields[i] = [];
     }
 
     decks = decks.map(_deck => {
-      return rq("http://localhost:5000/cards/generate/2")
+      return rq("http://localhost:5000/cards/generate/10")
       .then(body => {
         return JSON.parse(body).cards.map(card => ({
           "id": card.id,
@@ -77,6 +123,7 @@ class Game extends Component {
         decks,
         hands,
         isLoading: false,
+        gameState: GAME_STATES.EMPTY,
       });
     });
   }

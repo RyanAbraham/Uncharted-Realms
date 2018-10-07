@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Card from "../Card/components/Card";
+import "./CardList.css";
 
-const Hand = props =>
-  <div className="ur-hand">
+const CardList = props =>
+  <div className="ur-card-list">
     {
       props.cards.map(card =>
         (
@@ -13,7 +14,7 @@ const Hand = props =>
     }
   </div>;
 
-Hand.propTypes = {
+CardList.propTypes = {
   cards: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -27,4 +28,4 @@ Hand.propTypes = {
   ).isRequired,
 };
 
-export default Hand;
+export default CardList;
