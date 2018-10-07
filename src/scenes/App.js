@@ -10,6 +10,7 @@ import * as routes from "../constants/routes";
 import { firebase } from "../services/firebase";
 import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
 import blue from "material-ui/colors/blue";
+import { LinearProgress } from "material-ui";
 import NavBar from "./NavBar/NavBar";
 import history from "./history.js";
 
@@ -24,44 +25,50 @@ class App extends Component {
     super(props);
     this.state = {
       authUser: null,
+      isLoading: true,
     };
   }
 
   componentDidMount() {
     firebase.auth.onAuthStateChanged((authUser, _error) => {
-      authUser
-        ? this.setState(() => ({ authUser }))
-        : this.setState(() => ({ authUser: null }));
+      this.setState({
+        authUser,
+        isLoading: false,
+      });
     });
   }
 
   render() {
-    const { authUser } = this.state;
+    const { authUser, isLoading } = this.state;
     return (
       <Router history={history}>
         <MuiThemeProvider theme={this.theme}>
-          <div>
-            <NavBar authUser={authUser} />
-
-            <Route
-              exact
-              path={routes.LANDING}
-              component={() => <LandingPage />}
-            />
-            <Route exact path={routes.ENTRY} component={() => <EntryPage authUser={authUser} />} />
-            <Route
-              exact
-              path={routes.PASSWORD_RESET}
-              component={() => <PasswordResetPage />}
-            />
-            <Route exact path={routes.HOME} component={() => <HomePage />} />
-            <Route exact path={routes.GAME} component={() => <Game />} />
-            <Route
-              exact
-              path={routes.ACCOUNT}
-              component={() => <AccountPage authUser={authUser} />}
-            />
-          </div>
+          {
+            isLoading ? (<LinearProgress />)
+            : (
+              <div>
+              <NavBar authUser={authUser} />
+  
+              <Route
+                exact
+                path={routes.LANDING}
+                component={() => <LandingPage />}
+              />
+              <Route exact path={routes.ENTRY} component={() => <EntryPage authUser={authUser} />} />
+              <Route
+                exact
+                path={routes.PASSWORD_RESET}
+                component={() => <PasswordResetPage />}
+              />
+              <Route exact path={routes.HOME} component={() => <HomePage />} />
+              <Route exact path={routes.GAME} component={() => <Game />} />
+              <Route
+                exact
+                path={routes.ACCOUNT}
+                component={() => <AccountPage authUser={authUser} />}
+              />
+            </div>)
+            }
         </MuiThemeProvider>
       </Router>
     );
