@@ -1,3 +1,10 @@
+@import "../../../constants/variables.scss";
+
 .ur-game {
   margin: 40px;
+  &__card-lists {
+    display: grid;
+    grid-auto-rows: $card-height;
+    grid-gap: 20px 0;
+  }
 }

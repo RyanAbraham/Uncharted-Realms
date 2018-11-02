@@ -3,6 +3,9 @@
 $primary-color: #2196f3;
 $primary-color-light: #20bdf7;
 
+$card-height: 150px;
+$card-width: 120px;
+
 @mixin media-query($media) {
   @if $media == phone {
     @media only screen and (max-width: 768px) { @content; }

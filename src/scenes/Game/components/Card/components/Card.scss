@@ -1,12 +1,14 @@
+@import "../../../../../constants/variables.scss";
 @import url('https://fonts.googleapis.com/css?family=Merienda');
 
 .card {
+    display: inline-block;
     text-align: center;
     background-color:lightgray;
     user-select: none;
     font-family: 'Merienda', cursive;
-    width: 120px;
-    height: 150px;
+    height: $card-height;
+    width: $card-width;
     border: 2px solid black;
     border-radius: 10px;
 

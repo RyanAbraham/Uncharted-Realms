@@ -8,7 +8,7 @@ class Card extends Component {
     return (
       <div className="card">
         <div className="card__name">{name}</div>
-        <div className="card__clock">{clk}</div>
+        { clk > 0 && <div className="card__clock">{clk}</div> }
         <img className="card__img" src={img} alt="Card Artwork" />
         <div className="card__stats">
           <div className={"card__power " + (pow > 9 ? "card__power--long" : "")}>

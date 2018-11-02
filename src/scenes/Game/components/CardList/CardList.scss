@@ -1,3 +1,6 @@
+@import "../../../../constants/variables.scss";
+
 .ur-card-list {
   float: left;
+  height: $card-height;
 }
