@@ -22,10 +22,10 @@ CardList.propTypes = {
       pow: PropTypes.number.isRequired,
       hp: PropTypes.number.isRequired,
       clk: PropTypes.number.isRequired,
-      eff: PropTypes.string.isRequired,
+      effs: PropTypes.arrayOf(PropTypes.string),
       img: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+    })
+  ),
 };
 
 export default CardList;
